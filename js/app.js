@@ -4,63 +4,109 @@
 var app = {
     title: 'Indecision App',
     subtitle: 'Put your life decisions in the hands of a computer',
-    options: ['one', 'two']
+    options: []
 };
 
-var template = React.createElement(
-    'div',
-    null,
-    React.createElement(
-        'h1',
-        null,
-        app.title
-    ),
-    app.subtitle && React.createElement(
-        'p',
-        null,
-        app.subtitle
-    ),
-    React.createElement(
-        'p',
-        null,
-        app.options.length > 0 ? 'Here are your options' : 'No options'
-    )
-);
+var appRoot = document.getElementById('app');
+var onFormSubmit = function onFormSubmit(e) {
+    e.preventDefault();
+    var option = e.target.elements.option.value;
 
-//Conditional Rendering example
-var user = {
-    name: 'Vish',
-    age: 26,
-    location: 'New York'
+    if (option) {
+        app.options.push(option);
+        e.target.elements.option.value = '';
+        render();
+    }
+};
+var onRemove = function onRemove() {
+    app.options = [];
+    render();
 };
 
-function geoLocation(location) {
-    if (location) {
-        return React.createElement(
+var onMakeDecision = function onMakeDecision() {
+    var random = Math.floor(Math.random() * app.options.length);
+    var option = app.options[random];
+    alert(option);
+};
+
+var render = function render() {
+    var template = React.createElement(
+        'div',
+        null,
+        React.createElement(
+            'h1',
+            null,
+            app.title
+        ),
+        app.subtitle && React.createElement(
             'p',
             null,
-            'Location: ',
-            location
-        );
-    }
+            app.subtitle
+        ),
+        React.createElement(
+            'p',
+            null,
+            app.options.length > 0 ? 'Here are your options' : 'No options'
+        ),
+        React.createElement(
+            'button',
+            { disabled: app.options.length == 0, onClick: onMakeDecision },
+            'What should I do?'
+        ),
+        React.createElement(
+            'button',
+            { onClick: onRemove },
+            'Remove all'
+        ),
+        React.createElement(
+            'ol',
+            null,
+            app.options.map(function (option) {
+                return React.createElement(
+                    'li',
+                    { key: option },
+                    option
+                );
+            })
+        ),
+        React.createElement(
+            'form',
+            { onSubmit: onFormSubmit },
+            React.createElement('input', { type: 'text', name: 'option' }),
+            React.createElement(
+                'button',
+                null,
+                'Add option'
+            )
+        )
+    );
+
+    ReactDOM.render(template, appRoot);
+};
+
+render();
+
+/* let visible = true;
+
+const details = () => {
+    visible= !visible;
+    render();
 }
 
-var template2 = React.createElement(
-    'div',
-    null,
-    React.createElement(
-        'h1',
-        null,
-        user.name
-    ),
-    React.createElement(
-        'p',
-        null,
-        'Age: ',
-        user.age
-    ),
-    geoLocation(user.location)
-);
-var appRoot = document.getElementById('app');
+const appRoot = document.getElementById('app');
+const render = () => {
+    const visibility = (
+        <div>
+            <h1>Visibility</h1>
+            <button onClick={details}>
+                {visible ? 'Hide Details': 'Show details'}
+            </button>
+            {visible && (
+                <p>Hello details</p>
+            )}
+        </div>
+    );
+    ReactDOM.render(visibility, appRoot);
+};
 
-ReactDOM.render(template, appRoot);
+render(); */
