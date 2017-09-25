@@ -1,4 +1,4 @@
-//JSX
+/* //JSX
 const app = {
     title: 'Indecision App',
     subtitle: 'Put your life decisions in the hands of a computer',
@@ -52,8 +52,40 @@ const render = () => {
     ReactDOM.render(template, appRoot);
 }
 
-render();
+render(); */
+class VisibilityToggle extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleVisibilityToggle = this.handleVisibilityToggle.bind(this);
+        this.state = {
+            visible : false
+        }
+    }
 
+    handleVisibilityToggle() {
+        this.setState((prevState) => {
+            return {
+                visible: !prevState.visible
+            };
+        });
+    }
+
+    render() {
+        return (
+            <div>
+                <h1>Visibility</h1>
+                <button onClick={this.handleVisibilityToggle}>
+                {this.state.visible ? 'Hide Details': 'Show details'}
+                </button>
+                {this.state.visible && (
+                    <p>Hello details</p>
+                )}
+            </div>
+        );
+    }
+}
+
+ReactDOM.render(<VisibilityToggle />, document.getElementById('app'));
 /* let visible = true;
 
 const details = () => {
