@@ -29,9 +29,7 @@ var IndecisionApp = function (_React$Component) {
         key: 'handleRemoveAll',
         value: function handleRemoveAll() {
             this.setState(function () {
-                return {
-                    options: []
-                };
+                return { options: [] };
             });
         }
     }, {
@@ -49,10 +47,9 @@ var IndecisionApp = function (_React$Component) {
             } else if (this.state.options.indexOf(option) > -1) {
                 return 'This item already exisits';
             }
+
             this.setState(function (prevState) {
-                return {
-                    options: prevState.options.concat(option)
-                };
+                return { options: prevState.options.concat(option) };
             });
         }
     }, {
@@ -157,9 +154,7 @@ var AddOption = function (_React$Component2) {
             var error = this.props.handleAddOption(value);
 
             this.setState(function () {
-                return {
-                    error: error
-                };
+                return { error: error };
             });
         }
     }, {
