@@ -9,6 +9,20 @@ class IndecisionApp extends React.Component {
             options : props.options
         }
     }
+    //LIFECYCLE METHODS
+
+    componentDidMount() {
+        console.log('Fetching data');
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        console.log('Saving data');
+    }   
+
+    //Will work if a website has multiple pages
+    componentWillUnmount() {
+        console.log('Component will unmount');
+    }
 
     handleRemoveAll() {
         this.setState(() => ({ options: []}));

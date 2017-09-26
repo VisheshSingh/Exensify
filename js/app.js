@@ -25,8 +25,27 @@ var IndecisionApp = function (_React$Component) {
         };
         return _this;
     }
+    //LIFECYCLE METHODS
 
     _createClass(IndecisionApp, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            console.log('Fetching data');
+        }
+    }, {
+        key: 'componentDidUpdate',
+        value: function componentDidUpdate(prevProps, prevState) {
+            console.log('Saving data');
+        }
+
+        //Will work if a website has multiple pages
+
+    }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            console.log('Component will unmount');
+        }
+    }, {
         key: 'handleRemoveAll',
         value: function handleRemoveAll() {
             this.setState(function () {
