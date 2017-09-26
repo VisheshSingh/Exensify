@@ -12,11 +12,17 @@ class IndecisionApp extends React.Component {
     //LIFECYCLE METHODS
 
     componentDidMount() {
-        console.log('Fetching data');
+        const json = localStorage.getItem('options');
+        const options = JSON.parse(json);
+
+        this.setState(() => ({options: options}));
     }
 
     componentDidUpdate(prevProps, prevState) {
-        console.log('Saving data');
+        if(prevState.options.length !== this.state.options.length) {
+            const json = JSON.stringify(this.state.options);
+            localStorage.setItem('options', json);
+        }
     }   
 
     //Will work if a website has multiple pages

@@ -30,12 +30,20 @@ var IndecisionApp = function (_React$Component) {
     _createClass(IndecisionApp, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            console.log('Fetching data');
+            var json = localStorage.getItem('options');
+            var options = JSON.parse(json);
+
+            this.setState(function () {
+                return { options: options };
+            });
         }
     }, {
         key: 'componentDidUpdate',
         value: function componentDidUpdate(prevProps, prevState) {
-            console.log('Saving data');
+            if (prevState.options.length !== this.state.options.length) {
+                var json = JSON.stringify(this.state.options);
+                localStorage.setItem('options', json);
+            }
         }
 
         //Will work if a website has multiple pages
