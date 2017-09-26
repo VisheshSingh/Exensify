@@ -12,10 +12,16 @@ class IndecisionApp extends React.Component {
     //LIFECYCLE METHODS
 
     componentDidMount() {
-        const json = localStorage.getItem('options');
-        const options = JSON.parse(json);
+        try {
+            const json = localStorage.getItem('options');
+            const options = JSON.parse(json);
 
-        this.setState(() => ({options: options}));
+            if(options) {
+                this.setState(() => ({options: options}));
+            }
+        } catch(e) {
+            //Do nothing at all
+        }
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -105,6 +111,7 @@ const Options = (props) => {
     return (
         <div>
             <button onClick={props.handleRemoveAll}>Remove All</button>
+            {props.opt.length === 0 && <p>Please add an item to get started!</p>}
             {
                 props.opt.map((option)=>{
                     return (
@@ -150,6 +157,10 @@ class AddOption extends React.Component {
         const error = this.props.handleAddOption(value);
 
         this.setState(() => ({error: error}));
+
+        if(!error){
+            e.target.elements.option.value = '';
+        }
     }
     render() {
     return (

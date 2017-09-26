@@ -30,12 +30,18 @@ var IndecisionApp = function (_React$Component) {
     _createClass(IndecisionApp, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var json = localStorage.getItem('options');
-            var options = JSON.parse(json);
+            try {
+                var json = localStorage.getItem('options');
+                var options = JSON.parse(json);
 
-            this.setState(function () {
-                return { options: options };
-            });
+                if (options) {
+                    this.setState(function () {
+                        return { options: options };
+                    });
+                }
+            } catch (e) {
+                //Do nothing at all
+            }
         }
     }, {
         key: 'componentDidUpdate',
@@ -160,6 +166,11 @@ var Options = function Options(props) {
             { onClick: props.handleRemoveAll },
             'Remove All'
         ),
+        props.opt.length === 0 && React.createElement(
+            'p',
+            null,
+            'Please add an item to get started!'
+        ),
         props.opt.map(function (option) {
             return React.createElement(Option, {
                 key: option,
@@ -212,6 +223,10 @@ var AddOption = function (_React$Component2) {
             this.setState(function () {
                 return { error: error };
             });
+
+            if (!error) {
+                e.target.elements.option.value = '';
+            }
         }
     }, {
         key: 'render',
