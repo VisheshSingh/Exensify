@@ -8,68 +8,221 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Counter = function (_React$Component) {
-    _inherits(Counter, _React$Component);
+var IndecisionApp = function (_React$Component) {
+    _inherits(IndecisionApp, _React$Component);
 
-    function Counter(props) {
-        _classCallCheck(this, Counter);
+    function IndecisionApp(props) {
+        _classCallCheck(this, IndecisionApp);
 
-        var _this = _possibleConstructorReturn(this, (Counter.__proto__ || Object.getPrototypeOf(Counter)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (IndecisionApp.__proto__ || Object.getPrototypeOf(IndecisionApp)).call(this, props));
 
-        _this.addOne = _this.addOne.bind(_this);
-        _this.minusOne = _this.minusOne.bind(_this);
-        _this.reset = _this.reset.bind(_this);
+        _this.handleRemoveAll = _this.handleRemoveAll.bind(_this);
+        _this.handlePick = _this.handlePick.bind(_this);
+        _this.handleDeleteOption = _this.handleDeleteOption.bind(_this);
+        _this.handleAddOption = _this.handleAddOption.bind(_this);
         _this.state = {
-            count: 0
+            options: []
         };
         return _this;
     }
+    //LIFECYCLE METHODS
 
-    _createClass(Counter, [{
+    _createClass(IndecisionApp, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            var stringCount = localStorage.getItem('count');
-            var count = parseInt(stringCount, 10);
+            try {
+                var json = localStorage.getItem('options');
+                var options = JSON.parse(json);
 
-            if (!isNaN(count)) {
-                this.setState(function () {
-                    return { count: count };
-                });
+                if (options) {
+                    this.setState(function () {
+                        return { options: options };
+                    });
+                }
+            } catch (e) {
+                //Do nothing at all
             }
         }
     }, {
         key: 'componentDidUpdate',
         value: function componentDidUpdate(prevProps, prevState) {
-            if (prevState.count !== this.state.count) {
-                localStorage.setItem('count', this.state.count);
+            if (prevState.options.length !== this.state.options.length) {
+                var json = JSON.stringify(this.state.options);
+                localStorage.setItem('options', json);
             }
         }
+
+        //Will work if a website has multiple pages
+
     }, {
-        key: 'addOne',
-        value: function addOne() {
-            this.setState(function (prevState) {
-                return {
-                    count: prevState.count + 1
-                };
-            });
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            console.log('Component will unmount');
         }
     }, {
-        key: 'minusOne',
-        value: function minusOne() {
-            this.setState(function (prevState) {
-                return {
-                    count: prevState.count - 1
-                };
-            });
-        }
-    }, {
-        key: 'reset',
-        value: function reset() {
+        key: 'handleRemoveAll',
+        value: function handleRemoveAll() {
             this.setState(function () {
+                return { options: [] };
+            });
+        }
+    }, {
+        key: 'handleDeleteOption',
+        value: function handleDeleteOption(optionToRemove) {
+            this.setState(function (prevState) {
                 return {
-                    count: 0
+                    options: prevState.options.filter(function (option) {
+                        return optionToRemove !== option;
+                    })
                 };
             });
+        }
+    }, {
+        key: 'handlePick',
+        value: function handlePick() {
+            var random = Math.floor(Math.random() * this.state.options.length);
+            var val = this.state.options[random];
+            alert(val);
+        }
+    }, {
+        key: 'handleAddOption',
+        value: function handleAddOption(option) {
+            if (!option) {
+                return 'Enter a valid item!';
+            } else if (this.state.options.indexOf(option) > -1) {
+                return 'This item already exisits';
+            }
+
+            this.setState(function (prevState) {
+                return { options: prevState.options.concat(option) };
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var subtitleName = 'Put you life decisions in the hands of the computer';
+
+            return React.createElement(
+                'div',
+                null,
+                React.createElement(Header, { subtitle: subtitleName }),
+                React.createElement(Action, { hasOptions: this.state.options.length > 0, handlePick: this.handlePick }),
+                React.createElement(Options, {
+                    opt: this.state.options,
+                    handleRemoveAll: this.handleRemoveAll,
+                    handleDeleteOption: this.handleDeleteOption
+                }),
+                React.createElement(AddOption, { handleAddOption: this.handleAddOption })
+            );
+        }
+    }]);
+
+    return IndecisionApp;
+}(React.Component);
+
+var Header = function Header(props) {
+    return React.createElement(
+        'div',
+        null,
+        React.createElement(
+            'h1',
+            null,
+            props.title
+        ),
+        props.subtitle && React.createElement(
+            'h2',
+            null,
+            props.subtitle
+        )
+    );
+};
+
+Header.defaultProps = {
+    title: 'Indecision'
+};
+
+var Action = function Action(props) {
+    return React.createElement(
+        'div',
+        null,
+        React.createElement(
+            'button',
+            { onClick: props.handlePick, disabled: !props.hasOptions },
+            'What should I do?'
+        )
+    );
+};
+
+var Options = function Options(props) {
+    return React.createElement(
+        'div',
+        null,
+        React.createElement(
+            'button',
+            { onClick: props.handleRemoveAll },
+            'Remove All'
+        ),
+        props.opt.length === 0 && React.createElement(
+            'p',
+            null,
+            'Please add an item to get started!'
+        ),
+        props.opt.map(function (option) {
+            return React.createElement(Option, {
+                key: option,
+                optionText: option,
+                handleDeleteOption: props.handleDeleteOption
+            });
+        })
+    );
+};
+
+var Option = function Option(props) {
+    return React.createElement(
+        'div',
+        null,
+        props.optionText,
+        React.createElement(
+            'button',
+            {
+                onClick: function onClick() {
+                    props.handleDeleteOption(props.optionText);
+                }
+            },
+            'Remove'
+        )
+    );
+};
+
+var AddOption = function (_React$Component2) {
+    _inherits(AddOption, _React$Component2);
+
+    function AddOption(props) {
+        _classCallCheck(this, AddOption);
+
+        var _this2 = _possibleConstructorReturn(this, (AddOption.__proto__ || Object.getPrototypeOf(AddOption)).call(this, props));
+
+        _this2.handleAddOption = _this2.handleAddOption.bind(_this2);
+        _this2.state = {
+            error: undefined
+        };
+        return _this2;
+    }
+
+    _createClass(AddOption, [{
+        key: 'handleAddOption',
+        value: function handleAddOption(e) {
+            e.preventDefault();
+            var value = e.target.elements.option.value.trim();
+            var error = this.props.handleAddOption(value);
+
+            this.setState(function () {
+                return { error: error };
+            });
+
+            if (!error) {
+                e.target.elements.option.value = '';
+            }
         }
     }, {
         key: 'render',
@@ -77,32 +230,26 @@ var Counter = function (_React$Component) {
             return React.createElement(
                 'div',
                 null,
-                React.createElement(
-                    'h1',
+                this.state.error && React.createElement(
+                    'p',
                     null,
-                    'Count: ',
-                    this.state.count
+                    this.state.error
                 ),
                 React.createElement(
-                    'button',
-                    { onClick: this.addOne },
-                    '+1'
-                ),
-                React.createElement(
-                    'button',
-                    { onClick: this.minusOne },
-                    '-1'
-                ),
-                React.createElement(
-                    'button',
-                    { onClick: this.reset },
-                    'Reset'
+                    'form',
+                    { onSubmit: this.handleAddOption },
+                    React.createElement('input', { type: 'text', name: 'option' }),
+                    React.createElement(
+                        'button',
+                        null,
+                        'Add option'
+                    )
                 )
             );
         }
     }]);
 
-    return Counter;
+    return AddOption;
 }(React.Component);
 
-ReactDOM.render(React.createElement(Counter, null), document.getElementById('app'));
+ReactDOM.render(React.createElement(IndecisionApp, null), document.getElementById('app'));
