@@ -6,7 +6,7 @@ class IndecisionApp extends React.Component {
         this.handleDeleteOption = this.handleDeleteOption.bind(this);
         this.handleAddOption = this.handleAddOption.bind(this);
         this.state = {
-            options : props.options
+            options : []
         }
     }
     //LIFECYCLE METHODS
@@ -80,10 +80,6 @@ class IndecisionApp extends React.Component {
         </div>
         )
     }
-}
-
-IndecisionApp.defaultProps = {
-    options: []
 }
 
 const Header = (props) => {
