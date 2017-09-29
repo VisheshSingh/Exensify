@@ -1,0 +1,44 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\Vishesh\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add webpack@3.1.0
+
+PATH: 
+  C:\Users\Vishesh\Downloads\cmder\bin;C:\Users\Vishesh\Downloads\cmder\vendor\conemu-maximus5\ConEmu\Scripts;C:\Users\Vishesh\Downloads\cmder\vendor\conemu-maximus5;C:\Users\Vishesh\Downloads\cmder\vendor\conemu-maximus5\ConEmu;C:\Program Files\Microsoft MPI\Bin\;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Git\cmd;C:\Program Files\PuTTY\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\110\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\120\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\130\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\140\DTS\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\130\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\140\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\140\Tools\Binn\ManagementStudio\;C:\Program Files\nodejs\;C:\Users\Vishesh\AppData\Local\Programs\Python\Python36-32\Scripts\;C:\Users\Vishesh\AppData\Local\Programs\Python\Python36-32\;C:\Users\Vishesh\AppData\Local\Microsoft\WindowsApps;C:\Program Files (x86)\SSH Communications Security\SSH Secure Shell;C:\Program Files\Microsoft VS Code\bin;C:\Users\Vishesh\AppData\Roaming\npm;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\share\vim\vim74;C:\Users\Vishesh\Downloads\cmder\
+
+Yarn version: 
+  1.0.2
+
+Node version: 
+  8.5.0
+
+Platform: 
+  win32 x64
+
+npm manifest: 
+  {
+    "name": "React_Indecision",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "serve": "live-server",
+      "build": "babel src/react.js --out-file=js/app.js --presets=env,react --watch"
+    },
+    "keywords": [],
+    "author": "Vishesh Thakur",
+    "license": "ISC",
+    "dependencies": {
+      "babel-cli": "^6.24.1",
+      "babel-preset-env": "^1.5.2",
+      "babel-preset-react": "^6.24.1",
+      "live-server": "^1.2.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: EPERM: operation not permitted, unlink 'C:\Users\Vishesh\Documents\Projects\React_Indecision\node_modules\babel-polyfill\node_modules\regenerator-runtime'
