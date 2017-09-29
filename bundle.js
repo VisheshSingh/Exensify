@@ -65,9 +65,44 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__person_js__ = __webpack_require__(2);
+/* import './utils.js';
+import {square, add} from './utils.js';
 
 console.log('app.js is running!');
+console.log(square(5));
+console.log(add(541,123)); */
+
+
+
+console.log(__WEBPACK_IMPORTED_MODULE_0__person_js__["b" /* isAdult */](31));
+console.log(__WEBPACK_IMPORTED_MODULE_0__person_js__["a" /* canDrink */](12));
+
+/***/ }),
+/* 1 */,
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return isAdult; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return canDrink; });
+const isAdult = (x) => {
+    if(x>=18) {
+        console.log('Adult');
+        return true
+    } else {
+        console.log ('not adult');
+        return false
+    }
+}
+
+const canDrink = (x) => (x>21)
+
+
 
 /***/ })
 /******/ ]);
