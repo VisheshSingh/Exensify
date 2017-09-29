@@ -69,39 +69,35 @@
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__person_js__ = __webpack_require__(2);
-/* import './utils.js';
-import {square, add} from './utils.js';
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_js__ = __webpack_require__(1);
+
+
 
 console.log('app.js is running!');
-console.log(square(5));
-console.log(add(541,123)); */
+console.log(__WEBPACK_IMPORTED_MODULE_0__utils_js__["c" /* square */](5));
+console.log(__WEBPACK_IMPORTED_MODULE_0__utils_js__["a" /* add */](541,123));
+console.log(__WEBPACK_IMPORTED_MODULE_0__utils_js__["b" /* default */](10,41));
 
+/* import { isAdult, canDrink } from './person.js';
 
-
-console.log(__WEBPACK_IMPORTED_MODULE_0__person_js__["b" /* isAdult */](31));
-console.log(__WEBPACK_IMPORTED_MODULE_0__person_js__["a" /* canDrink */](12));
+console.log(isAdult(31));
+console.log(canDrink(12)); */
 
 /***/ }),
-/* 1 */,
-/* 2 */
+/* 1 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return isAdult; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return canDrink; });
-const isAdult = (x) => {
-    if(x>=18) {
-        console.log('Adult');
-        return true
-    } else {
-        console.log ('not adult');
-        return false
-    }
-}
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return add; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return subtract; });
+console.log('utils.js is running');
 
-const canDrink = (x) => (x>21)
+const square = (x) => x*x;
+/* harmony export (immutable) */ __webpack_exports__["c"] = square;
 
+const add = (a,b) => a+b;
+const subtract = (a,b) => a-b;
+//named export
 
 
 /***/ })
