@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "serve": "live-server",
-    "build":"webpack --watch",
+    "build": "webpack --watch",
     "build-babel": "babel src/react.js --out-file=js/app.js --presets=env,react --watch"
   },
   "keywords": [],
@@ -16,6 +16,9 @@
     "babel-preset-env": "^1.5.2",
     "babel-preset-react": "^6.24.1",
     "live-server": "^1.2.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "validator": "^8.0.0",
     "webpack": "^3.1.0"
   }
 }
