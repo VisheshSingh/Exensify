@@ -1,0 +1,23 @@
+.add-option-error {
+    color: $off-white;
+    font-style: italic;
+    padding: 0 $m-size;
+    margin: $m-size 0 0 0;
+    font-weight: 500;
+}
+
+.add-option{
+    display: flex;
+    padding: $m-size;
+}
+
+.add-option__input{
+    flex-grow: 1;
+    background: $dark-blue;
+    border:none;
+    color: $off-white;
+    border-bottom: 0.3rem solid darken($dark-blue, 10%);
+    margin-right: $s-size;
+    padding:$m-size;
+    font-weight: 600;
+}
