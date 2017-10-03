@@ -4,7 +4,7 @@ import Option from './Option';
 const Options = (props) => {
     return (
         <div>
-            <button onClick={props.handleRemoveAll}>Remove All</button>
+            <button className="button button--link" onClick={props.handleRemoveAll}>Remove All</button>
             {props.opt.length === 0 && <p>Please add an item to get started!</p>}
             {
                 props.opt.map((option)=>{
