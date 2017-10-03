@@ -30,3 +30,9 @@
     color: $off-white;
     padding: 0;
 }
+
+@media (max-width: 45rem) {
+    .big_button {
+        margin-bottom: $m-size;
+    }
+}
