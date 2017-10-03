@@ -70,7 +70,7 @@ export default class IndecisionApp extends React.Component {
     }
 
     render() { 
-    const subtitleName = 'Put you life decisions in the hands of the computer';
+    const subtitleName = 'Put you life decisions in the hands of a computer';
 
     return (
         <div>
