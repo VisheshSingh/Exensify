@@ -1,5 +1,26 @@
 import { createStore } from 'redux';
 
+//ACTION GENERATORS
+const incrementCount = ({incrementBy = 1} = {}) => ({
+    type: 'INCREMENT',
+    incrementBy: typeof incrementBy === "number" ? incrementBy : 1
+});
+
+const decrementCount = ({decrementBy = 1} = {}) => ({
+    type: 'DECREMENT',
+    decrementBy: typeof decrementBy === "number" ? decrementBy : 1
+});
+
+const Reset = () => ({
+    type:'RESET'
+})
+
+const setCount = ({count}) => ({
+    type:'SET',
+    count
+})
+
+
 const store = createStore((state = {count:0}, action) => {
     switch(action.type) {
         case 'INCREMENT':
@@ -30,31 +51,27 @@ const unsubscribe = store.subscribe(() => {
 });
 
 //ACTIONS
-store.dispatch({
-    type: 'INCREMENT',
-    incrementBy: 5
-});
+// store.dispatch({
+//     type: 'INCREMENT',
+//     incrementBy: 5
+// });
+
+store.dispatch(incrementCount({incrementBy: 5}));
 
 store.dispatch({
     type: 'INCREMENT'
 });
 
+store.dispatch(incrementCount());
+
 //RESET 
-store.dispatch({
-    type: 'RESET'
-});
+store.dispatch(Reset());
 
 store.dispatch({
     type: 'DECREMENT'
 });
 
-store.dispatch({
-    type: 'DECREMENT',
-    decrementBy: 10
-});
+store.dispatch(decrementCount({decrementBy: 5}));
 
-store.dispatch({
-    type: 'SET',
-    count: 100
-});
+store.dispatch(setCount({count:104}));
 
